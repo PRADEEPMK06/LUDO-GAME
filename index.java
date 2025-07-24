@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
-// Harun Hussain 2905048
 public class LudoGameHandler {
 	
 	private static String[] colorList = { "Green", "Yellow", "Red", "Blue" };
@@ -13,12 +12,7 @@ public class LudoGameHandler {
 	private static LudoBoard ludoBoard;
 	
 	public static void main(String[] args) {
-		
-		/*
-		 * 
-		 *  initialize game by asking for the number of players
-		 *  
-		 */
+		//Get number of players
 		System.out.println("Welcome! Type in the number of players (2-4).");		
 		boolean inputCorrect = false;
 		Scanner scanner = null;
@@ -30,7 +24,6 @@ public class LudoGameHandler {
 			try {
 				number = scanner.nextInt();
 			} catch(Exception e) {
-				//ignore
 			}
 			
 			if(number>1 && number<5) {
@@ -51,11 +44,7 @@ public class LudoGameHandler {
 		for(int i=0; i<playerList.size(); i++)
 			System.out.println(playerList.get(i) + " has joined the game.");
 		
-		/*
-		 * 
-		 * roll the dice to determine who goes first
-		 * 
-		 */
+		//Rolling dice
 		
 		System.out.println("The players have to roll the dice to " + 
 							"determine who goes first. To roll a dice, "
@@ -74,7 +63,6 @@ public class LudoGameHandler {
 			try {
 				input = scanner.next();
 			} catch(Exception e) {
-				// ignore
 			}
 				
 			if(input.equals("r")) {
@@ -99,12 +87,7 @@ public class LudoGameHandler {
 		
 		List<Player> highestRollers = determineHighestRoller(playerList);
 		
-		/*
-		 * 
-		 * if there are multiple high rollers, do a loop
-		 * to end up with just 1 highest roller
-		 * 
-		 */
+		//One highest rolling of dice
 		
 		boolean onlyOneHighest = highestRollers.size()==1;
 		
@@ -174,11 +157,7 @@ public class LudoGameHandler {
 		
 	}
 	
-	/*
-	 * 
-	 * Controls the game sequence
-	 * 
-	 */
+	//Controlling game sequence
 	
 	private static void runGame() {
 		
@@ -251,7 +230,7 @@ public class LudoGameHandler {
 				
 				if(command.equals("t")) {
 					
-					// if did not roll 6, can't take a piece out
+					//Roll 6 to realese a peice
 					if(!currentPlayer.hasRolledSix()) {
 						System.out.println("Invalid move. Pieces can be taken out only " + 
 								"when a 6 has been rolled.");
@@ -336,12 +315,7 @@ public class LudoGameHandler {
 		
 	}
 	
-	/*
-	 * 
-	 * Return type is list in case there are multiple
-	 * high-rollers.
-	 * 
-	 */
+	//Multiple high rollers
 	private static List<Player> determineHighestRoller(List<Player> playersWhoRolled) {
 		
 		List<Player> highRollers = new ArrayList<Player>();
@@ -358,17 +332,14 @@ public class LudoGameHandler {
 			
 			if(currentHighest>nextPlayersRoll) {
 				
-				// do nothing, highestRoller already points
-				// to the highest rolling player
+				//Highest role player
 				
 			} else if(currentHighest<nextPlayersRoll) {
 				
-				// assign next player as the highest roller
+				//Next player
 				highestRoller = nextPlayer;
 				
-				// clear the multiple roller list
-				// because nextPlayer has rolled
-				// more than both previous players
+				//More than previous roller
 				highRollers.clear();
 				
 			} else if(currentHighest==nextPlayersRoll) {
